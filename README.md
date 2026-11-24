@@ -1,102 +1,68 @@
 # Painel de Projetos e Tarefas
 
-Aplicação web desenvolvida com Flask para organizar projetos e acompanhar suas tarefas. O sistema permite criar projetos, cadastrar tarefas com descrição e responsável, definir prioridades e atualizar o status de cada tarefa.
+Aplicação Python para organizar projetos e acompanhar tarefas. A interface gráfica Tkinter é a opção padrão; a interface web original, construída com Flask, continua disponível como alternativa.
 
 ## Funcionalidades
 
-- Criação de projetos
-- Cadastro de tarefas com responsável e prioridade
+- Criação e seleção de projetos
+- Cadastro de tarefas com descrição, responsável e prioridade
 - Prioridades: baixa, média e alta
 - Status: pendente, em andamento e concluída
-- Filtro de tarefas por status
-- Resumo de quantidade e progresso do projeto
-- Interface responsiva para computador e celular
+- Atualização do status das tarefas
+- Interface desktop Tkinter e interface web Flask
 
-## Tecnologias
+## Requisitos
 
-- Python 3.10
-- Flask 3
-- HTML e CSS
-- Testes com `unittest`
+- Python 3.10 ou superior
+- Tkinter (normalmente incluído no Python; em distribuições Linux pode exigir instalação do pacote do sistema, como python-tk ou tk)
+- Flask 3 para executar a interface web
 
-## Pré-requisitos
+## Instalação
 
-- Python 3.10 instalado
-- Git, opcional, para clonar o repositório
-
-No Windows, confira a versão do Python com:
-
-```powershell
-python --version
-```
-
-## Configuração no Windows
-
-Abra o PowerShell na pasta do repositório e execute:
-
-```powershell
-cd "C:\caminho\python-trabalho-de-classe-main"
-
+```bash
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-
-python -m pip install --upgrade pip
+# Linux/macOS: source .venv/bin/activate
+# Windows PowerShell: .venv\\Scripts\\Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
-Se o PowerShell bloquear a ativação do ambiente virtual, habilite a execução apenas para a sessão atual:
+## Executar
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
-```
+A interface Tkinter inicia por padrão:
 
-Também é possível iniciar o servidor de duas maneiras:
-
-```powershell
+```bash
 python app.py
 ```
 
-ou:
+Para iniciar a interface web Flask:
 
-```powershell
-flask --app app run --host 127.0.0.1 --port 8000
+```bash
+python app.py --web
 ```
 
-## Acesso no navegador
+Acesse http://127.0.0.1:8000. As duas interfaces utilizam o mesmo serviço de gerenciamento e não dependem uma da outra.
 
-Com o servidor em execução, abra:
+## Testes
 
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-Para encerrar o servidor, pressione `Ctrl+C` no terminal.
-
-## Executar os testes
-
-Na pasta do projeto e com o ambiente virtual ativo:
-
-```powershell
+```bash
 python -m unittest discover -s testes -p "test_*.py"
 ```
 
-## Estrutura do projeto
+## Estrutura
 
 ```text
 .
-├── app.py                 # Aplicação Flask e rotas
-├── requirements.txt       # Dependências Python
+├── app.py
+├── interfaces/
+│   ├── base.py
+│   ├── tkinter.py
+│   ├── web.py
+│   └── templates/index.html
 ├── modelos/
-│   ├── projeto.py         # Classe Projeto
-│   └── tarefa.py          # Classes Tarefa, Prioridade e Status
 ├── servicos/
-│   └── gerenciador.py     # Gerenciamento dos projetos em memória
-├── templates/
-│   └── index.html         # Interface web
 └── testes/
-    ├── test_app.py        # Teste da página web
-    └── test_sistema.py    # Testes das regras do sistema
 ```
 
-## Observações
+## Armazenamento
 
-Os projetos e tarefas são armazenados em memória. Os dados ficam disponíveis enquanto o servidor está aberto e são apagados ao reiniciar ou encerrar a aplicação. A aplicação não utiliza banco de dados ou armazenamento persistente neste momento.
+Projetos e tarefas são mantidos em memória. Os dados são perdidos ao encerrar a aplicação; não há persistência nesta versão.
