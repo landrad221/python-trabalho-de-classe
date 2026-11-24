@@ -1,12 +1,10 @@
 import unittest
-
-from app import app
+from interfaces.web import criar_app
 
 
 class TestAplicacaoWeb(unittest.TestCase):
     def test_pagina_inicial(self):
-        resposta = app.test_client().get("/")
-
+        resposta = criar_app().test_client().get("/")
         self.assertEqual(resposta.status_code, 200)
 
 
